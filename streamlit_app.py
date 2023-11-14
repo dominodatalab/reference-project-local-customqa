@@ -103,8 +103,8 @@ else:
     metadatas = []
     texts = []
     for row in data:
-      metadatas.append(row.metadata)
-      texts.append(row.page_content)
+        metadatas.append(row.metadata)
+        texts.append(row.page_content)
         
     doc_store = Qdrant.from_texts(texts, 
                                 metadatas=metadatas,

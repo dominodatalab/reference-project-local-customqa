@@ -10,6 +10,7 @@ from langchain.embeddings import HuggingFaceBgeEmbeddings
 from langchain.llms.huggingface_pipeline import HuggingFacePipeline
 from langchain.vectorstores.qdrant import Qdrant
 from langchain.text_splitter import TokenTextSplitter
+from langchain.document_loaders import PyPDFLoader, PyPDFDirectoryLoader
 from PyPDF2 import PdfReader
 from qdrant_client import QdrantClient
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig, pipeline
@@ -54,7 +55,7 @@ PROMPT = PromptTemplate(template=prompt_template, input_variables=["context","qu
 #
 chain_type_kwargs = {"prompt": PROMPT}
 
-# Initialise session state variables
+# Initialise session state variables.
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
 if 'past' not in st.session_state:

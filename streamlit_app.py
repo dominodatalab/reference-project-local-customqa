@@ -96,23 +96,23 @@ if pdf_texts:
                                   location=":memory:",
                                   collection=f"{embedding_model_name}_press_release"
                                  )
-else:
-    if doc_store == None:
-        loader = PyPDFDirectoryLoader("/mnt/data/Local-RAG-Custom/nissan")
-        data = loader.load_and_split(RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0))
-        # Split the data into pages
-        metadatas = []
-        texts = []
-        for row in data:
-            metadatas.append(row.metadata)
-            texts.append(row.page_content)
+# else:
+#     if doc_store == None:
+#         loader = PyPDFDirectoryLoader("/mnt/data/Local-RAG-Custom/nissan")
+#         data = loader.load_and_split(RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0))
+#         # Split the data into pages
+#         metadatas = []
+#         texts = []
+#         for row in data:
+#             metadatas.append(row.metadata)
+#             texts.append(row.page_content)
         
-        doc_store = Qdrant.from_texts(texts, 
-                                    metadatas=metadatas,
-                                    embedding=embeddings,
-                                    location=":memory:",
-                                    collection=f"{embedding_model_name}_press_release"
-                                    )
+#         doc_store = Qdrant.from_texts(texts, 
+#                                     metadatas=metadatas,
+#                                     embedding=embeddings,
+#                                     location=":memory:",
+#                                     collection=f"{embedding_model_name}_press_release"
+#                                     )
 
 if doc_store:
     chain_type_kwargs = {"prompt": PROMPT}

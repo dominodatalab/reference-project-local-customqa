@@ -39,7 +39,7 @@ def get_pdf_text():
 
 
 
-os.environ['SENTENCE_TRANSFORMERS_HOME'] = '/mnt/data/Local-RAG-Custom/model_cache/'
+os.environ['SENTENCE_TRANSFORMERS_HOME'] = '/mnt/data/' + os.environ['DOMINO_PROJECT_NAME'] + '/model_cache/'
 
 
 prompt_template = """Use the following pieces of context to answer the question enclosed within  3 backticks at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
@@ -148,7 +148,7 @@ if doc_store:
 
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
-        cache_dir="/mnt/data/Local-RAG-Custom/model_cache/",
+        cache_dir="/mnt/data/" + os.environ['DOMINO_PROJECT_NAME'] + "/model_cache/",
         quantization_config=bnb_config,
         device_map='auto'
     )

@@ -160,7 +160,7 @@ if doc_store:
     tokenizer.padding_side = "right"
     tokenizer.pad_token_id = model.config.eos_token_id
     
-    pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=100)
+    pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=300)
     rag_llm = HuggingFacePipeline(pipeline=pipe)
 
     qa_chain = RetrievalQA.from_chain_type(llm=rag_llm,

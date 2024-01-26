@@ -46,7 +46,9 @@ embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-small-en",
                                       encode_kwargs=encode_kwargs
                                      )
 
-qdrant = QdrantClient(path="/mnt/data/" + os.environ['DOMINO_PROJECT_NAME'] + "/nissan/local_qdrant/")
+#qdrant = QdrantClient(path="/mnt/data/" + os.environ['DOMINO_PROJECT_NAME'] + "/nissan/local_qdrant/")
+qdrant = QdrantClient(path="/mnt/artifacts/local_qdrant/")
+print(qdrant.get_collections())
 
 doc_store = Qdrant(
     client=qdrant,

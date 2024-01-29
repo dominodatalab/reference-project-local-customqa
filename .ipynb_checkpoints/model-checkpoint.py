@@ -40,17 +40,19 @@ PROMPT = PromptTemplate(template=prompt_template, input_variables=["context","qu
 model_kwargs = {'device': 'cpu'}
 encode_kwargs = {'normalize_embeddings': True}
 embedding_model_name = "BAAI/bge-small-en"
-os.environ['SENTENCE_TRANSFORMERS_HOME'] = '/mnt/data/' + os.environ['DOMINO_PROJECT_NAME'] + '/model_cache/'
+os.environ['SENTENCE_TRANSFORMERS_HOME'] = '/mnt/artifacts/model_cache/'
 embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-small-en",
                                       model_kwargs=model_kwargs,
                                       encode_kwargs=encode_kwargs
                                      )
 
-qdrant = QdrantClient(path="/mnt/data/" + os.environ['DOMINO_PROJECT_NAME'] + "/" + os.environ['CUSTOMER_NAME'] +"/local_qdrant/")
+#qdrant = QdrantClient(path="/mnt/data/" + os.environ['DOMINO_PROJECT_NAME'] + "/nissan/local_qdrant/")
+qdrant = QdrantClient(path="/mnt/artifacts/local_qdrant/")
+print(qdrant.get_collections())
 
 doc_store = Qdrant(
     client=qdrant,
-    collection_name=os.environ['CUSTOMER_NAME'],
+    collection_name="nissan",
     embeddings=embeddings
 )
 
@@ -88,7 +90,7 @@ model_id = "NousResearch/Llama-2-7b-chat-hf"
 
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
-    cache_dir="/mnt/data/" + os.environ['DOMINO_PROJECT_NAME'] + "/model_cache/",
+    cache_dir="/mnt/artifacts/model_cache/",
     quantization_config=bnb_config,
     device_map='auto'
 )

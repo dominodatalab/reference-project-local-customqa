@@ -40,7 +40,7 @@ PROMPT = PromptTemplate(template=prompt_template, input_variables=["context","qu
 model_kwargs = {'device': 'cpu'}
 encode_kwargs = {'normalize_embeddings': True}
 embedding_model_name = "BAAI/bge-small-en"
-os.environ['SENTENCE_TRANSFORMERS_HOME'] = '/mnt/data/' + os.environ['DOMINO_PROJECT_NAME'] + '/model_cache/'
+os.environ['SENTENCE_TRANSFORMERS_HOME'] = '/mnt/artifacts/model_cache/'
 embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-small-en",
                                       model_kwargs=model_kwargs,
                                       encode_kwargs=encode_kwargs
@@ -90,7 +90,7 @@ model_id = "NousResearch/Llama-2-7b-chat-hf"
 
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
-    cache_dir="/mnt/data/" + os.environ['DOMINO_PROJECT_NAME'] + "/model_cache/",
+    cache_dir="/mnt/artifacts/model_cache/",
     quantization_config=bnb_config,
     device_map='auto'
 )

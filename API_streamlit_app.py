@@ -49,7 +49,8 @@ with container:
                 ),
                 json={
                     "data": {
-                        "prompt": user_input
+                        "prompt": user_input,
+                        "max_new_tokens": output_tokens
                     }
                 }
             )

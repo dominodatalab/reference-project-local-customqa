@@ -29,7 +29,7 @@ if clear_button:
         {"role": "system", "content": "You are a helpful assistant."}
     ]
     
-st.image("https://wieck-nissanao-production.s3.amazonaws.com/photos/87dd7b734e373e65761492bd446b20efd0a56737/thumbnail-364x204.jpg")
+st.image("https://www-europe.nissan-cdn.net/content/dam/Nissan/nissan_europe/hp_cmstest/Master_Homepage_showcase_ariya_RHD.jpg.ximg.l_full_h.smart.jpg", width=300)
 # container for chat history
 response_container = st.container()
 # container for text box

@@ -29,7 +29,7 @@ if clear_button:
         {"role": "system", "content": "You are a helpful assistant."}
     ]
     
-st.image("https://www-europe.nissan-cdn.net/content/dam/Nissan/nissan_europe/hp_cmstest/Master_Homepage_showcase_ariya_RHD.jpg.ximg.l_full_h.smart.jpg")
+st.image("https://poctemppublic.s3.us-west-2.amazonaws.com/n_car.png")
 # container for chat history
 response_container = st.container()
 # container for text box
@@ -63,4 +63,4 @@ with container:
         with response_container:
             for i in range(len(st.session_state['generated'])):
                 message(st.session_state["past"][i], is_user=True, logo='https://freesvg.org/img/1367934593.png', key=str(i) + '_user')
-                message(st.session_state["generated"][i], logo='https://wieck-nissanao-production.s3.amazonaws.com/photos/87dd7b734e373e65761492bd446b20efd0a56737/thumbnail-364x204.jpg', key=str(i))
+                message(st.session_state["generated"][i], logo='https://poctemppublic.s3.us-west-2.amazonaws.com/n_logo.png', key=str(i))

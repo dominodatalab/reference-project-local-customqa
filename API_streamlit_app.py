@@ -1,23 +1,10 @@
 import os
-import pickle
-import random
 import streamlit as st
-import torch
-
-from langchain import PromptTemplate
-from langchain.chains import RetrievalQA
-from langchain.embeddings import HuggingFaceBgeEmbeddings
-from langchain.llms.huggingface_pipeline import HuggingFacePipeline
-from langchain.vectorstores.qdrant import Qdrant
-from langchain.text_splitter import TokenTextSplitter, RecursiveCharacterTextSplitter
-from langchain.document_loaders import PyPDFLoader, PyPDFDirectoryLoader
-from PyPDF2 import PdfReader
-from qdrant_client import QdrantClient
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig, pipeline
 
 from streamlit.web.server import websocket_headers
 from streamlit_chat import message
 
+import requests
 
 
 # Initialise session state variables.
@@ -55,14 +42,14 @@ with container:
     if submit_button and user_input and qa_chain:
         answer = None
         with st.spinner("Searching for the answer..."):
-            response = requests.post("https://se-demo.domino.tech:443/models/65b2846db2e5737d566de52e/latest/model",
+            result = requests.post("https://se-demo.domino.tech:443/models/65b2846db2e5737d566de52e/latest/model",
                 auth=(
                     "dWyCVvxpastxkWhGf0TIXMXpsWWGnSrfGzFAV7yr3O33f4Hs3qmeQB5sWxbfrLy7",
                     "dWyCVvxpastxkWhGf0TIXMXpsWWGnSrfGzFAV7yr3O33f4Hs3qmeQB5sWxbfrLy7"
                 ),
                 json={
                     "data": {
-                        "prompt": "How do I change the batteries in the key fob?"
+                        "prompt": user_input
                     }
                 }
             )

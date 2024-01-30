@@ -78,7 +78,7 @@ if clear_button:
     st.session_state['messages'] = [
         {"role": "system", "content": "You are a helpful assistant."}
     ]
-    
+
 embedding_model_name = "BAAI/bge-small-en"
 model_kwargs = {'device': 'cpu'}
 encode_kwargs = {'normalize_embeddings': True}
@@ -106,7 +106,7 @@ if pdf_texts:
 #         for row in data:
 #             metadatas.append(row.metadata)
 #             texts.append(row.page_content)
-        
+
 #         doc_store = Qdrant.from_texts(texts, 
 #                                     metadatas=metadatas,
 #                                     embedding=embeddings,

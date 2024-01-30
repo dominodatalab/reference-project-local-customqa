@@ -110,7 +110,7 @@ def generate(prompt: str = None, max_new_tokens: int=200):
         return 'Please provide a prompt.'
             
     # Setup the QA chain
-    pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=200)
+    pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=max_new_tokens)
     rag_llm = HuggingFacePipeline(pipeline=pipe)
 
     qa_chain = RetrievalQA.from_chain_type(llm=rag_llm,

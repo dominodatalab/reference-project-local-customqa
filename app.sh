@@ -12,4 +12,4 @@ cat << EOF >> ~/.streamlit/config.toml
 base="dark"
 EOF
      
-streamlit run streamlit_app.py
+streamlit run API_streamlit_app.py

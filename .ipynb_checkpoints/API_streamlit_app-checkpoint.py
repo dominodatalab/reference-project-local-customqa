@@ -54,7 +54,7 @@ with container:
                 }
             )
         if result:
-            answer = result["result"]["text_from_llm"]
+            answer = result.json()["result"]["text_from_llm"]
             st.session_state['past'].append(user_input)
             st.session_state['generated'].append(answer)
         

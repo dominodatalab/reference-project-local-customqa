@@ -39,7 +39,7 @@ with container:
     with st.form(key='my_form', clear_on_submit=True):
         user_input = st.text_area("You:", key='input', height=100)
         submit_button = st.form_submit_button(label='Send')
-    if submit_button and user_input and qa_chain:
+    if submit_button and user_input:
         answer = None
         with st.spinner("Searching for the answer..."):
             result = requests.post("https://se-demo.domino.tech:443/models/65b2846db2e5737d566de52e/latest/model",

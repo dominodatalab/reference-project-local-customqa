@@ -87,4 +87,4 @@ with container:
             for i in range(len(st.session_state['generated'])):
                 message(st.session_state["past"][i], is_user=True, logo='https://freesvg.org/img/1367934593.png', key=str(i) + '_user')
                 # You can change this chat image to the logo of your organisation
-                message(st.session_state["generated"][i], logo='images/domino_logo.png', key=str(i))
+                message(st.session_state["generated"][i], logo="images/domino_logo.png", key=str(i))

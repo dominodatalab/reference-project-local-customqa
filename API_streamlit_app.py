@@ -38,7 +38,7 @@ if clear_button:
     ]
 
 # Header Image - You can change this to suit your application
-st.image("https://poctemppublic.s3.us-west-2.amazonaws.com/n_car.png")
+st.image("images/domino_banner.png")
 # container for chat history
 response_container = st.container()
 # container for text box
@@ -87,4 +87,4 @@ with container:
             for i in range(len(st.session_state['generated'])):
                 message(st.session_state["past"][i], is_user=True, logo='https://freesvg.org/img/1367934593.png', key=str(i) + '_user')
                 # You can change this chat image to the logo of your organisation
-                message(st.session_state["generated"][i], logo='https://poctemppublic.s3.us-west-2.amazonaws.com/n_logo.png', key=str(i))
+                message(st.session_state["generated"][i], logo='images/domino_logo.png', key=str(i))

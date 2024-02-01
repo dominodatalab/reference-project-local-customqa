@@ -62,7 +62,6 @@ embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-small-en",
 # We are storing our vectors in a local Qdrant instance. 
 # You may want to swap this out for Qdrant server, or to a differnt vector store
 qdrant = QdrantClient(path="/mnt/artifacts/local_qdrant/")
-print(qdrant.get_collections())
 
 # NOTE: you will need to change the collection name!
 doc_store = Qdrant(

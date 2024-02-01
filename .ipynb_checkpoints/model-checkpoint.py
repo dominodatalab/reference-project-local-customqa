@@ -20,7 +20,7 @@ import os
 import random
 import torch
 import warnings
-#warnings.filterwarnings('ignore')
+warnings.filterwarnings('ignore')
 
 ################################################################################
 # Prompt Engineering
@@ -155,10 +155,10 @@ def generate(prompt: str = None, max_new_tokens: int=200):
 # Main function for testing
 ################################################################################
 
-# You can test the model by running 'pip model.py' in a cmd prompt
+# You can test the model by running 'python model.py' in a cmd prompt
 def main():
     
-    result = generate(prompt = "how do I change the battery in the key fob?")
+    result = generate(prompt = "How much are companies spending on AI?")
     print(result)
         
 if __name__ == "__main__":

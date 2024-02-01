@@ -22,7 +22,10 @@ import torch
 import warnings
 #warnings.filterwarnings('ignore')
 
-     
+################################################################################
+# Prompt Engineering
+################################################################################     
+
 # Setup the prompt template to use for the QA bot
 prompt_template = """Use the following pieces of context to answer the question enclosed within  3 backticks at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
 Please provide an answer which is factually correct and based on the information retrieved from the vector store.
@@ -36,6 +39,10 @@ ANSWER:
 PROMPT = PromptTemplate(template=prompt_template, input_variables=["context","question"])
 #
 
+################################################################################
+# Embedding Model
+################################################################################
+
 # Load the embedding model
 model_kwargs = {'device': 'cpu'}
 encode_kwargs = {'normalize_embeddings': True}
@@ -46,13 +53,21 @@ embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-small-en",
                                       encode_kwargs=encode_kwargs
                                      )
 
-#qdrant = QdrantClient(path="/mnt/data/" + os.environ['DOMINO_PROJECT_NAME'] + "/nissan/local_qdrant/")
+################################################################################
+# Vector Store
+################################################################################
+
+# Connect to the Vector Store
+# NOTE: the vector store must be initialised using the Llama_Qdrant_RAG.ipynb notebook first!
+# We are storing our vectors in a local Qdrant instance. 
+# You may want to swap this out for Qdrant server, or to a differnt vector store
 qdrant = QdrantClient(path="/mnt/artifacts/local_qdrant/")
 print(qdrant.get_collections())
 
+# NOTE: you will need to change the collection name!
 doc_store = Qdrant(
     client=qdrant,
-    collection_name="nissan",
+    collection_name="mlops",
     embeddings=embeddings
 )
 
@@ -86,8 +101,14 @@ bnb_config = BitsAndBytesConfig(
     bnb_4bit_use_double_quant=use_nested_quant,
 )
 
+################################################################################
+# Foundation Model
+################################################################################
+
+# We are using the Llama-2-7b-chat-hf model
 model_id = "NousResearch/Llama-2-7b-chat-hf"
 
+# This should be loaded from the local cache we created in Llama_Qdrant_RAG.ipynb notebook
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
     cache_dir="/mnt/artifacts/model_cache/",
@@ -103,8 +124,14 @@ tokenizer.padding_side = "right"
 tokenizer.pad_token_id = model.config.eos_token_id
 
 
-     
-#Generate the output from the LLM
+################################################################################
+# Generate Function - this is what we will wrap as an API
+################################################################################
+
+# Generate the output from the LLM
+# Takes two inputs:
+# prompt - this is the question from the user
+# max_new_tokens (optional, default=200) - this is the maximum number of characters 
 def generate(prompt: str = None, max_new_tokens: int=200):
     if prompt is None:
         return 'Please provide a prompt.'
@@ -121,9 +148,14 @@ def generate(prompt: str = None, max_new_tokens: int=200):
                                       )
     result = qa_chain(prompt)
     
-    # return {'text_from_llm': output_text, 'tokens_per_sec': tokens_per_sec}
     return {'text_from_llm': result['result']}
 
+
+################################################################################
+# Main function for testing
+################################################################################
+
+# You can test the model by running 'pip model.py' in a cmd prompt
 def main():
     
     result = generate(prompt = "how do I change the battery in the key fob?")

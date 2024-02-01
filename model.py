@@ -67,7 +67,7 @@ print(qdrant.get_collections())
 # NOTE: you will need to change the collection name!
 doc_store = Qdrant(
     client=qdrant,
-    collection_name="nissan",
+    collection_name="mlops",
     embeddings=embeddings
 )
 

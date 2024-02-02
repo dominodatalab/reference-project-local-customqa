@@ -8,7 +8,7 @@ This template is licensed under Apache 2.0 and contains the following components
 
 This reference project shows how to use Meta's Llama2 LLM to do Q&A over information that the Llama2 model has not been trained on and will not be able to provide answers out of the box. The project has the following files 
 
-* Llama_Qdrant_RAG.ipynb : This file loads a PDF, converts it to embeddings, stores the embeddings in a local Qdrant Vector Store, defines a prompt, downloads and caches the Llama2 model then constructs a RetrievalQA chain and calls the model to get a response.
+* Llama_Qdrant_RAG.ipynb : This file loads a PDF, converts it to embeddings, stores the embeddings in a local Qdrant Vector Store, defines a prompt, downloads and caches the Llama2 model then constructs a RetrievalQA chain and calls the model to get a response. this file contains instructions on tailoring for your own data files.
 
 * model.py : This file is used to deploy our model as a Domino Model API so we can call it programatically from our application. You must run the Llama_Qdrant_RAG.ipynb to initialise the Qdrant vector store first. It has a `generate` function that should be used as the Model API function. Follow the [instructions in our documentation](https://docs.dominodatalab.com/en/latest/user_guide/8dbc91/deploy-models-at-rest/) to deploy this.
 
@@ -27,6 +27,7 @@ This project requires the following [compute environments](https://docs.dominoda
 
 You must set your [Workspace volume size to 20GB](https://docs.dominodatalab.com/en/latest/user_guide/0ea71e/change-the-workspace-volume-size/) before running the code to ensure that there is enough space to store the model.
 
+Note: you must run the Llama_Qdrant_RAG.ipynb to initialise the Qdrant vector database prior to deploying the Model. You should also deploy the model and copy across the model URL and access token to the API_streamlit_app.py before deploying it.
 
 ### Environment Requirements
 

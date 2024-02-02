@@ -61,7 +61,7 @@ with container:
         answer = None
         with st.spinner("Searching for the answer..."):
             # You will need to update the "post" and "auth" details for the model you have deployed
-            result = requests.post("https://se-demo.domino.tech:443/models/65b2846db2e5737d566de52e/latest/model",
+            response = requests.post("https://se-demo.domino.tech:443/models/65b2846db2e5737d566de52e/latest/model",
                 auth=(
                     "dWyCVvxpastxkWhGf0TIXMXpsWWGnSrfGzFAV7yr3O33f4Hs3qmeQB5sWxbfrLy7",
                     "dWyCVvxpastxkWhGf0TIXMXpsWWGnSrfGzFAV7yr3O33f4Hs3qmeQB5sWxbfrLy7"
@@ -75,9 +75,9 @@ with container:
                     }
                 }
             )
-        if result:
+        if response:
             # The response from the API is returned as JSON and we want to get the text response from the model
-            answer = result.json()["result"]["text_from_llm"]
+            answer = response.json()["result"]["text_from_llm"]
             st.session_state['past'].append(user_input)
             st.session_state['generated'].append(answer)
     

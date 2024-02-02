@@ -110,7 +110,7 @@ model_id = "NousResearch/Llama-2-7b-chat-hf"
 # This should be loaded from the local cache we created in Llama_Qdrant_RAG.ipynb notebook
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
-    cache_dir="/mnt/artifacts/model_cache/",
+    cache_dir="/tmp/",
     quantization_config=bnb_config,
     device_map='auto'
 )

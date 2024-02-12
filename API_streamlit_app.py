@@ -70,7 +70,7 @@ with container:
                     # This is the data payload for the API
                     # It contains the question and the number of output characters from the UI
                     "data": {
-                        "prompt": user_input,
+                        "input_text": user_input,
                         "max_new_tokens": output_tokens
                     }
                 }

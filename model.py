@@ -129,9 +129,9 @@ tokenizer.pad_token_id = model.config.eos_token_id
 
 # Generate the output from the LLM
 # Takes two inputs:
-# prompt - this is the question from the user
+# input_text - this is the question from the user
 # max_new_tokens (optional, default=200) - this is the maximum number of characters 
-def generate(prompt: str = None, max_new_tokens: int=200):
+def generate(input_text: str = None, max_new_tokens: int=200):
     if prompt is None:
         return 'Please provide a prompt.'
             
@@ -145,7 +145,7 @@ def generate(prompt: str = None, max_new_tokens: int=200):
                                        retriever=doc_store.as_retriever(search_kwargs={"k": 5}),
                                        return_source_documents=True
                                       )
-    result = qa_chain(prompt)
+    result = qa_chain(input_text)
     
     return {'text_from_llm': result['result']}
 

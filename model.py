@@ -132,8 +132,8 @@ tokenizer.pad_token_id = model.config.eos_token_id
 # input_text - this is the question from the user
 # max_new_tokens (optional, default=200) - this is the maximum number of characters 
 def generate(input_text: str = None, max_new_tokens: int=200):
-    if prompt is None:
-        return 'Please provide a prompt.'
+    if input_text is None:
+        return 'Please provide input_text.'
             
     # Setup the QA chain
     pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=max_new_tokens)

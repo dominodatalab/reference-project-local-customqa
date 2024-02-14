@@ -157,7 +157,7 @@ def generate(input_text: str = None, max_new_tokens: int=200):
 # You can test the model by running 'python model.py' in a cmd prompt
 def main():
     
-    result = generate(prompt = "How much are companies spending on AI?")
+    result = generate(input_text = "How much are companies spending on AI?")
     print(result)
         
 if __name__ == "__main__":
